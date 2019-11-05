@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -26,15 +28,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">razor</a>
+                <a asp-area="" asp-controller="RegistrosDefeitos" asp-action="Index" class="navbar-brand">razor</a>
             </div>
+            @if (Context.Session.GetString("email") != null) 
+            {
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-area="" asp-controller="RegistrosDefeitos" asp-action="Create">Defeitos</a></li>
+                    <li><a asp-area="" asp-controller="RegistrosDefeitos" asp-action="Index">Relatórios</a></li>
                 </ul>
             </div>
+            }
         </div>
     </nav>
 

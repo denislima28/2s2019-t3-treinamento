@@ -27,7 +27,7 @@ namespace razor
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
+                options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
@@ -35,6 +35,9 @@ namespace razor
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddDbContext<LanHouseContext>();
+
+            services.AddSession(s => s.IdleTimeout = TimeSpan.FromMinutes(30));
+            //Sem isso, a sessão não começa mesmo que o usuário tente logar com as informações certas.
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +52,7 @@ namespace razor
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            app.UseSession(); //É preciso disso para que a sessão seja usada e apareça para o usuário.
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
@@ -56,7 +60,7 @@ namespace razor
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Login}/{action=Index}/{id?}");
+                    template: "{controller=Login}/{action=Create}/{id?}");
             });
         }
     }

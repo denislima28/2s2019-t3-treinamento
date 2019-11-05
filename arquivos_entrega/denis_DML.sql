@@ -32,6 +32,9 @@ with (
 	codepage = 'acp'
 );
 
+USE DENIS_TREINAMENTO_LANHOUSE;
+
+SELECT *FROM USUARIOS;
 
 SELECT * FROM DEFEITOS;
 
